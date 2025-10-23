@@ -1,0 +1,27 @@
+{
+  "client_id": "Neveshta",
+  "is_multi_token": false,
+  "environment": "Development",
+  "extra": [],
+  "database": {
+    "version": 1,
+    "db_name": "Neveshta",
+    "tables_name" : ["config"]
+  },
+  "api_methods" : {
+    "user_info": "",
+    "authorization_by_app_code": "",
+    "refresh_token": ""
+  },
+  "production" : {
+    "base_url" : "",
+    "redirect_uri": "",
+    "sso_site_url": ""
+  },
+  "development" : {
+    "base_url" : "",
+    "redirect_uri": "",
+    "sso_site_url": ""
+  }
+}
+

@@ -1,0 +1,189 @@
+/*#region Estedad FA ---------------*/
+/*Estedad-FD-Black*/
+
+/*#region Estedad FA ---------------*/
+
+/*Estedad-FD-Black*/
+@font-face {
+    font-family: "Estedad-FD-Black";
+    src: url('../fonts/Estedad/fa/Estedad-FD-Black.ttf') format("truetype");
+}
+
+/*Estedad-FD-Bold*/
+@font-face {
+    font-family: "Estedad-FD-Bold";
+    src: url('../fonts/Estedad/fa/Estedad-FD-Bold.ttf') format("truetype");
+}
+
+/*Estedad-FD-Medium*/
+@font-face {
+    font-family: "Estedad-FD-Medium";
+    src: url('../fonts/Estedad/fa/Estedad-FD-Medium.ttf') format("truetype");
+}
+
+/*Estedad-FD-Light*/
+@font-face {
+    font-family: "Estedad-FD-Light";
+    src: url('../fonts/Estedad/fa/Estedad-FD-Light.ttf') format("truetype");
+}
+
+/*Estedad-FD-Thin*/
+@font-face {
+    font-family: "Estedad-FD-Thin";
+    src: url('../fonts/Estedad/fa/Estedad-FD-Thin.ttf') format("truetype");
+}
+
+.Estedad_FD_Black {
+    font-family: 'Estedad-FD-Black', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Bold {
+    font-family: 'Estedad-FD-Bold', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Medium {
+    font-family: 'Estedad-FD-Medium', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Light {
+    font-family: 'Estedad-FD-Light', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Thin {
+    font-family: 'Estedad-FD-Thin', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD {
+    font-family: 'Estedad-FD-Medium', Tahoma, Sans-Serif !important;
+}
+
+
+/*#endregion*/
+
+
+/*#region Estedad EN ---------------*/
+
+/*Estedad-Black*/
+@font-face {
+    font-family: "Estedad-Black";
+    src: url('../fonts/Estedad/en/Estedad-Black.ttf') format("truetype");
+}
+
+/*Estedad-Bold*/
+@font-face {
+    font-family: "Estedad-Bold";
+    src: url('../fonts/Estedad/en/Estedad-Bold.ttf') format("truetype");
+}
+
+/*Estedad-Medium*/
+@font-face {
+    font-family: "Estedad-Medium";
+    src: url('../fonts/Estedad/en/Estedad-Medium.ttf') format("truetype");
+}
+
+/*Estedad-Light*/
+@font-face {
+    font-family: "Estedad-Light";
+    src: url('../fonts/Estedad/en/Estedad-Light.ttf') format("truetype");
+}
+
+/*Estedad-Thin*/
+@font-face {
+    font-family: "Estedad-Thin";
+    src: url('../fonts/Estedad/en/Estedad-Thin.ttf') format("truetype");
+}
+
+.Estedad_Black {
+    font-family: 'Estedad-Black', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Bold {
+    font-family: 'Estedad-Bold', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Medium {
+    font-family: 'Estedad-Medium', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Light {
+    font-family: 'Estedad-Light', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Thin {
+    font-family: 'Estedad-Thin', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad {
+    font-family: 'Estedad-Medium', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region Cinema ---------------*/
+@font-face {
+    font-family: "Cinema";
+    src: url('../fonts/Cinema/Cinema Full.ttf') format("truetype");
+}
+.Font-Cinema {
+    font-family: 'Cinema', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region Lalezar ---------------*/
+@font-face {
+    font-family: "Lalezar";
+    src: url('../fonts/Lalezar/Lalezar-Regular.ttf') format("truetype");
+}
+.Font-Lalezar {
+    font-family: 'Lalezar', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region Sahel ---------------*/
+@font-face {
+    font-family: "Sahel";
+    src: url('../fonts/Sahel/Sahel-FD.ttf') format("truetype");
+}
+.Font-Sahel {
+    font-family: 'Sahel', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region Shabnam ---------------*/
+@font-face {
+    font-family: "Shabnam";
+    src: url('../fonts/Shabnam/Shabnam.ttf') format("truetype");
+}
+.Font-Shabnam {
+    font-family: 'Shabnam', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region Vazir ---------------*/
+@font-face {
+    font-family: "Vazir";
+    src: url('../fonts/Vazir/Vazir.ttf') format("truetype");
+}
+.Font-Vazir {
+    font-family: 'Vazir', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region DastNevis ---------------*/
+@font-face {
+    font-family: "Dast Nevis";
+    src: url('../fonts/DastNevis/DastNevis .otf') format("opentype");
+}
+.Font-Darya {
+    font-family: 'DastNevis', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region DastNevis-Darya ---------------*/
+@font-face {
+    font-family: "Digi Darya Bold";
+    src: url('../fonts/Darya/دریا.ttf') format("truetype");
+}
+.Font-Darya {
+    font-family: 'Digi Darya Bold', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
