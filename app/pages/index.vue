@@ -1,17 +1,3 @@
-<script setup lang="ts">
-//#region-Imports
-import { onMounted } from "vue";
-import { navigateTo } from "nuxt/app";
-//#endregion
-//#region-Navigation-Logic
-onMounted(() => {
-  setTimeout(() => {
-    navigateTo("/starter");
-  }, 2000);
-});
-//#endregion
-</script>
-
 <template>
   <!--#region-Main-Container-->
   <div
@@ -30,12 +16,30 @@ onMounted(() => {
     <!--#endregion-->
     <!--#region-Footer-->
     <div class="w-full text-center absolute bottom-5">
-      <p class="text-md mt-2">ساخته شده با 💜 توسط تیم کداینچی</p>
-      <p class="text-md mt-2">v 0.2</p>
+      <p class="text-md mt-2">ساخته شده با 💜 توسط تیم کدینچی</p>
+      <p class="text-md mt-2">v.1.2</p>
     </div>
     <!--#endregion-->
   </div>
   <!--#endregion-->
 </template>
 
-<style></style>
+<script setup>
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+onMounted(() => {
+  // فقط اگر صفحه فعلی index باشد
+  if (window.location.pathname === "/" || window.location.pathname === "/index") {
+    setTimeout(() => {
+      router.replace("/starter"); // replace بهتر است تا Back باعث بازگشت به index نشود
+    }, 3000); // 3 ثانیه بعد هدایت
+  }
+});
+</script>
+
+<style scoped>
+/* استایل‌ها می‌توانند همین‌جا باشند یا جدا شوند */
+</style>

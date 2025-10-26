@@ -9,14 +9,7 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-// بعد از 3 ثانیه، کاربر به starter.vue هدایت می‌شود
-setTimeout(() => {
-  router.push('/starter')
-}, 100000) // 3000 میلی‌ثانیه = 3 ثانیه
+// نیازی به هدایت خودکار یا router نیست
 </script>
 
 <style>

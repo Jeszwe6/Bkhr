@@ -14,7 +14,7 @@ export default defineNuxtConfig({
                 {name: "version", content: "0.1"}
             ],
             link: [
-                {rel: "icon", type: "image/png", href: "/img/logo.ico"},
+                {rel: "icon", type: "image/png", href: "/img/favicon.png"},
             ]
         },
         pageTransition: {name: "page", mode: "out-in"},
@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     },
     ssr: false,
     devtools: {enabled: false},
-    modules: ['cap-module', '@nuxt/ui', "nuxt-marquee"],
+   modules: ['cap-module', '@nuxt/ui', 'nuxt-marquee', 'nuxt-icon'],
     css: ["@/assets/css/main.css", "@/assets/css/font.css"],
     vite: {
         plugins: [
