@@ -123,7 +123,7 @@ const toggleNotifications = (event: Event) => {
     <!-- Header -->
     <div class="top-bar flex justify-between items-center p-4 my-5">
       <div class="flex items-center gap-3">
-        <img src="/img/Oval-10.png" alt="پروفایل" class="w-15 h-15 rounded-full border" />
+        <img src="/img/Oval-10.png" alt="پروفایل" class="w-15 h-15 rounded-full border border-black" />
         <span class="font-semibold text-lg">سلام نرجس</span>
       </div>
 
@@ -236,7 +236,7 @@ const toggleNotifications = (event: Event) => {
             </li>
           </ul>
           <div class="mt-auto">
-            <div class="w-full h-2 bg-gray-300 rounded-full overflow-hidden">
+            <div class="w-full h-2 bg-gray-300 rounded-full overflow-hidden shadow-sm">
               <div
                 class="h-full bg-yellow-500 transition-all duration-300"
                 :style="{ width: order.progress + '%' }"
@@ -257,7 +257,7 @@ const toggleNotifications = (event: Event) => {
         <div
           v-for="c in contacts"
           :key="c.id"
-          class="flex justify-between items-center bg-gray-100 rounded-full px-5 py-2 transition"
+          class="flex justify-between items-center bg-gray-100 rounded-full px-5 py-2 transition shadow-sm"
         >
           <div class="flex items-center gap-3 flex-row-reverse">
             <span class="font-semibold text-lg">{{ c.name }}</span>

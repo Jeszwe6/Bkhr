@@ -69,7 +69,7 @@ const submitForm = () => {
       <!--#region-Register-Form-->
       <div class="w-full max-w-sm space-y-4">
         <!--#region-User-Name -->
-        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 shadow-sm">
           <!--#region-User-Name-Icon -->
           <Icon class="text-gray-700 ml-2" name="lucide:user-round" size="20" />
           <!--#endregion-->
@@ -82,7 +82,7 @@ const submitForm = () => {
         </div>
         <!--#endregion-->
         <!--#region-mail-->
-        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 shadow-sm">
           <!--#region-Email-Icon-->
           <Icon class="text-gray-700 ml-2" name="lucide:mail" size="20" />
           <!--#endregion-->
@@ -95,7 +95,9 @@ const submitForm = () => {
         </div>
         <!--#endregion-->
         <!--#region-Password-->
-        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative">
+        <div
+          class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative shadow-sm"
+        >
           <!--#region-Password-Icon-->
           <Icon class="text-gray-700 ml-2" name="lucide:lock-open" size="20" />
           <!--#endregion-->
@@ -123,7 +125,9 @@ const submitForm = () => {
         </div>
         <!--#endregion-->
         <!--#region Confirm-Password-->
-        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative">
+        <div
+          class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative shadow-sm"
+        >
           <Icon class="text-gray-700 ml-2" name="lucide:lock-open" size="20" />
           <input
             :type="showConfirmPassword ? 'text' : 'password'"
@@ -150,7 +154,9 @@ const submitForm = () => {
         <div class="flex items-center justify-center mt-3 space-x-2">
           <input type="checkbox" id="rules" class="circle" v-model="agreeRules" />
           <label for="rules" class="text-sm text-center text-black">
-            <button class="bg-yellow-300 p-1 rotate-5" @click="openModal">قوانین و مقررات</button>
+            <button class="bg-yellow-300 p-1 rotate-5" @click="openModal">
+              قوانین و مقررات
+            </button>
             را قبول می‌کنم
           </label>
         </div>

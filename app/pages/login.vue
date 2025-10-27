@@ -64,7 +64,7 @@ const sendRecovery = () => {
       <!--#region-Register-Form-->
       <div class="w-full max-w-sm space-y-4">
         <!--#region-User-Name-Field-->
-        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2">
+        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2  shadow-sm">
           <!--#region-User-Name-Icon -->
           <Icon class="text-gray-700 ml-2" name="lucide:user-round" size="20" />
           <!--#endregion-->
@@ -78,7 +78,7 @@ const sendRecovery = () => {
         <!--#endregion-->
 
         <!--#region-Password-Field-->
-        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2 relative">
+        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2 relative  shadow-sm">
           <!--#region-Password-Icon-->
           <Icon class="text-gray-700 ml-2" name="lucide:lock-open" size="20" />
           <!--#endregion-->
