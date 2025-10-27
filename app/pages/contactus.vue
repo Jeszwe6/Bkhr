@@ -1,8 +1,9 @@
 <template>
+  <!--#region Chat App Container-->
   <div class="flex flex-col h-screen bg-gray-100">
-    <!-- Header -->
+    <!--#region Header-->
     <header
-      class="flex items-center justify-between bg-white text-black font-bold px-4 py-5 shadow-lg"
+      class="flex items-center justify-between bg-white text-black font-bold px-4 py-5 shadow-[0_6px_10px_rgba(0,0,0,0.1)]"
     >
       <div class="flex items-center gap-3">
         <img
@@ -16,37 +17,32 @@
         </div>
       </div>
       <NuxtLink
-        to="/home"
+        to="/setting"
         class="bg-black text-white rounded-full p-2 flex items-center justify-center shadow hover:bg-gray-100 transition"
       >
         <Icon name="lucide:arrow-left" width="20" height="20" />
       </NuxtLink>
     </header>
+    <!--#endregion-->
 
-    <!-- Chat messages -->
+    <!--#region Messages-->
     <div ref="chatContainer" class="flex-1 overflow-y-auto p-4 space-y-3 bg-white">
-      <transition-group name="fade-slide" tag="div">
+  <transition-group name="fade-slide" tag="div" class="flex flex-col gap-3">
         <div
           v-for="(msg, idx) in messages"
           :key="msgKey(msg, idx)"
           :class="msg.from === 'user' ? 'text-right' : 'text-left'"
         >
-          <div class="mb-1 text-xs text-gray-400">
-            {{ msg.time }}
-          </div>
-
-          <div
-            :class="[
-              'inline-block p-3 rounded-2xl shadow max-w-[75%] break-words transition-all',
-              msg.from === 'user'
-                ? 'bg-yellow-400 text-black rounded-br-none ml-auto'
-                : 'bg-gray-100 text-black rounded-bl-none',
-            ]"
-          >
-            <!-- متن -->
+         <div
+        :class="[
+          'inline-block p-3 rounded-2xl shadow max-w-[75%] break-words transition-all',
+          msg.from === 'user'
+            ? 'bg-yellow-300 text-black rounded-br-none'
+            : 'bg-gray-100 text-black rounded-bl-none',
+        ]"
+      >
             <p v-if="msg.type === 'text'">{{ getText(msg) }}</p>
 
-            <!-- عکس -->
             <img
               v-if="msg.type === 'image'"
               :src="getImage(msg)"
@@ -54,97 +50,165 @@
               alt="uploaded image"
             />
 
-            <!-- ویدیو -->
             <video
               v-if="msg.type === 'video'"
               :src="getVideo(msg)"
               controls
               class="rounded-2xl mt-1 max-w-full"
             ></video>
+
+            <div class="text-[10px] text-gray-600 mt-1 text-left">{{ msg.time }}</div>
           </div>
         </div>
       </transition-group>
     </div>
+    <!--#endregion-->
 
-    <!-- Input section -->
+    <!--#region Input Section-->
     <form
       @submit.prevent="sendMessage"
-      class="flex items-center gap-2 p-3 bg-white border-t"
+      dir="rtl"
+      class="flex items-center justify-center gap-3 p-3 bg-white border-t relative"
     >
-      <!-- Upload -->
-      <label for="fileInput" class="cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="gray"
-          class="w-6 h-6"
+      <!--#region Upload Button with Dropdown-->
+      <div class="relative flex-shrink-0" @click.stop>
+        <button
+          @click="toggleUpload"
+          type="button"
+          class="cursor-pointer flex items-center justify-center transition-transform duration-300"
+          :class="{ 'rotate-45': uploadOpen }"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 9V5.25m0 0L9 12l6.75 6.75M9 12h12"
+          <Icon
+            name="lucide:circle-plus"
+            class="w-7 h-7 text-gray-700 hover:text-yellow-400 transition-colors duration-200"
           />
-        </svg>
-      </label>
-      <input
-        id="fileInput"
-        type="file"
-        accept="image/*,video/*"
-        class="hidden"
-        @change="handleFileUpload"
-      />
+        </button>
 
-      <!-- Input -->
+        <!--#region Dropdown Menu-->
+        <transition name="fade-slide">
+          <div
+            v-if="uploadOpen"
+            class="absolute bottom-12 right-0 bg-white border border-gray-200 rounded-xl shadow-lg w-44 p-2 space-y-1 z-50"
+          >
+            <label
+              for="imageInput"
+              class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            >
+              <Icon name="lucide:image" class="w-5 h-5 text-blue-500" />
+              <span class="text-sm text-gray-700">ارسال عکس</span>
+            </label>
+            <input
+              id="imageInput"
+              type="file"
+              accept="image/*"
+              class="hidden"
+              @change="handleFileUpload"
+            />
+
+            <label
+              for="videoInput"
+              class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            >
+              <Icon name="lucide:video" class="w-5 h-5 text-red-500" />
+              <span class="text-sm text-gray-700">ارسال ویدیو</span>
+            </label>
+            <input
+              id="videoInput"
+              type="file"
+              accept="video/*"
+              class="hidden"
+              @change="handleFileUpload"
+            />
+
+            <label
+              for="fileInput"
+              class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            >
+              <Icon name="lucide:file" class="w-5 h-5 text-yellow-500" />
+              <span class="text-sm text-gray-700">ارسال فایل</span>
+            </label>
+            <input
+              id="fileInput"
+              type="file"
+              class="hidden"
+              @change="handleFileUpload"
+            />
+
+            <button
+              type="button"
+              @click="sendContact"
+              class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg w-full"
+            >
+              <Icon name="lucide:user" class="w-5 h-5 text-green-500" />
+              <span class="text-sm text-gray-700">ارسال مخاطب</span>
+            </button>
+
+            <button
+              type="button"
+              @click="sendLocation"
+              class="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg w-full"
+            >
+              <Icon name="lucide:map-pin" class="w-5 h-5 text-purple-500" />
+              <span class="text-sm text-gray-700">ارسال موقعیت</span>
+            </button>
+          </div>
+        </transition>
+        <!--#endregion-->
+      </div>
+      <!--#endregion-->
+
+      <!--#region Input-->
       <input
         v-model="newMessage"
         type="text"
         placeholder="پیام خود را بنویسید..."
-        class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-sm focus:outline-none"
+        class="flex-1 bg-gray-100 rounded-full px-4 py-2 text-sm focus:outline-none text-right"
       />
 
-      <!-- Send -->
+      <!--#region Send Icon-->
       <button
         type="submit"
-        class="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold active:scale-95 transition-transform"
+        class="bg-black text-white p-2 w-10 h-10 rounded-full active:scale-95 transition-transform flex-shrink-0"
       >
-        ارسال
+        <Icon name="lucide:arrow-up" class="w-5 h-5" />
       </button>
+      <!--#endregion-->
     </form>
+    <!--#endregion-->
   </div>
+  <!--#endregion-->
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from "vue";
+//#region Imports
+import { ref, nextTick } from "vue"
+//#endregion
 
-/* === تایپ‌ها === */
-type Sender = "user" | "support";
+//#region Types
+type Sender = "user" | "support"
 
 interface BaseMessage {
-  from: Sender;
-  time: string;
+  from: Sender
+  time: string
 }
 
-/* discriminated unions */
 export interface TextMessage extends BaseMessage {
-  type: "text";
-  text: string;
+  type: "text"
+  text: string
 }
-
 export interface ImageMessage extends BaseMessage {
-  type: "image";
-  image: string; // URL
+  type: "image"
+  image: string
 }
-
 export interface VideoMessage extends BaseMessage {
-  type: "video";
-  video: string; // URL
+  type: "video"
+  video: string
 }
 
-type Message = TextMessage | ImageMessage | VideoMessage;
+type Message = TextMessage | ImageMessage | VideoMessage
+//#endregion
 
-/* === state === */
+//#region Refs and State
 const messages = ref<Message[]>([
   {
     from: "support",
@@ -152,116 +216,129 @@ const messages = ref<Message[]>([
     text: "سلام! به پشتیبانی کُدینچی خوش اومدی 😊 چطور می‌تونم کمکت کنم؟",
     time: "21:00",
   },
-]);
+])
 
-const newMessage = ref("");
-const chatContainer = ref<HTMLElement | null>(null);
+const newMessage = ref("")
+const uploadOpen = ref(false)
+const chatContainer = ref<HTMLElement | null>(null)
+//#endregion
 
-/* === helper type-guards & accessors (همه در اسکریپت، بدون استفاده از `as` در template) === */
-const isText = (m: Message): m is TextMessage => m.type === "text";
-const isImage = (m: Message): m is ImageMessage => m.type === "image";
-const isVideo = (m: Message): m is VideoMessage => m.type === "video";
+//#region Type Guards
+const isText = (m: Message): m is TextMessage => m.type === "text"
+const isImage = (m: Message): m is ImageMessage => m.type === "image"
+const isVideo = (m: Message): m is VideoMessage => m.type === "video"
+//#endregion
 
-const getText = (m: Message): string => (isText(m) ? m.text : "");
-const getImage = (m: Message): string => (isImage(m) ? m.image : "");
-const getVideo = (m: Message): string => (isVideo(m) ? m.video : "");
+//#region Helper Functions
+const getText = (m: Message): string => (isText(m) ? m.text : "")
+const getImage = (m: Message): string => (isImage(m) ? m.image : "")
+const getVideo = (m: Message): string => (isVideo(m) ? m.video : "")
+const msgKey = (m: Message, idx: number) => `${m.time}-${m.type}-${idx}`
 
-const msgKey = (m: Message, idx: number) => {
-  // تولید کلید یکتا بدون وابستگی به assertion در template
-  return `${m.time}-${m.type}-${idx}`;
-};
-
-/* === utilities === */
 const nowTime = (): string => {
-  const now = new Date();
-  return now.toLocaleTimeString("fa-IR", { hour: "2-digit", minute: "2-digit" });
-};
+  const now = new Date()
+  return now.toLocaleTimeString("fa-IR", { hour: "2-digit", minute: "2-digit" })
+}
 
 const scrollToBottom = () => {
   nextTick(() => {
-    if (chatContainer.value) {
-      chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
-    }
-  });
-};
+    if (chatContainer.value) chatContainer.value.scrollTop = chatContainer.value.scrollHeight
+  })
+}
+//#endregion
 
-/* === send text message === */
+//#region Event Handlers
+const toggleUpload = () => {
+  uploadOpen.value = !uploadOpen.value
+}
+
 const sendMessage = () => {
-  const text = newMessage.value.trim();
-  if (!text) return;
+  const text = newMessage.value.trim()
+  if (!text) return
 
   const msg: TextMessage = {
     from: "user",
     type: "text",
     text,
     time: nowTime(),
-  };
+  }
 
-  messages.value.push(msg);
-  newMessage.value = "";
-  scrollToBottom();
+  messages.value.push(msg)
+  newMessage.value = ""
+  scrollToBottom()
 
-  // پاسخ نمونه پشتیبانی
   setTimeout(() => {
     messages.value.push({
       from: "support",
       type: "text",
       text: "پیامت رو دریافت کردیم؛ همکاران در حال بررسی هستند 😊",
       time: nowTime(),
-    });
-    scrollToBottom();
-  }, 900);
-};
+    })
+    scrollToBottom()
+  }, 900)
+}
 
-/* === handle file upload (image/video) === */
 const handleFileUpload = (e: Event) => {
-  const input = e.target as HTMLInputElement;
-  const file = input.files?.[0];
-  if (!file) return;
+  const input = e.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (!file) return
 
-  const url = URL.createObjectURL(file);
-  const t = file.type || "";
+  const url = URL.createObjectURL(file)
+  const t = file.type || ""
 
   if (t.startsWith("image")) {
-    const imgMsg: ImageMessage = {
-      from: "user",
-      type: "image",
-      image: url,
-      time: nowTime(),
-    };
-    messages.value.push(imgMsg);
+    messages.value.push({ from: "user", type: "image", image: url, time: nowTime() })
   } else if (t.startsWith("video")) {
-    const vidMsg: VideoMessage = {
-      from: "user",
-      type: "video",
-      video: url,
-      time: nowTime(),
-    };
-    messages.value.push(vidMsg);
+    messages.value.push({ from: "user", type: "video", video: url, time: nowTime() })
   } else {
-    console.warn("Unsupported file type:", t);
+    console.warn("Unsupported file type:", t)
   }
 
-  // reset input so same file can be picked again
-  input.value = "";
-  scrollToBottom();
-};
+  input.value = ""
+  scrollToBottom()
+}
+
+const sendContact = () => {
+  messages.value.push({
+    from: "user",
+    type: "text",
+    text: "📞 ارسال مخاطب انجام شد",
+    time: nowTime(),
+  })
+  uploadOpen.value = false
+}
+
+const sendLocation = () => {
+  messages.value.push({
+    from: "user",
+    type: "text",
+    text: "📍 موقعیت شما ارسال شد",
+    time: nowTime(),
+  })
+  uploadOpen.value = false
+}
+//#endregion
 </script>
 
 <style scoped>
+/*#region Animations*/
 .fade-slide-enter-active {
-  transition: all 0.28s ease;
+  transition: all 0.25s ease;
 }
 .fade-slide-enter-from {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(10px);
 }
 .fade-slide-enter-to {
   opacity: 1;
   transform: translateY(0);
 }
+.rotate-45 {
+  transform: rotate(45deg);
+}
+/*#endregion*/
 
-/* scrollbar */
+/*#region Scrollbar*/
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -269,4 +346,5 @@ const handleFileUpload = (e: Event) => {
   background-color: #facc15;
   border-radius: 10px;
 }
+/*#endregion*/
 </style>
