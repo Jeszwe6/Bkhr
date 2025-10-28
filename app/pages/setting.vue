@@ -140,9 +140,9 @@ function saveDataSettings() {
       <h2 class="font-bold text-xl">تنظیمات</h2>
       <NuxtLink
         to="/home"
-        class="bg-black text-white rounded-full p-2 flex items-center justify-center"
+        class="bg-black text-white rounded-full w-10 h-10 p-2 flex items-center justify-center"
       >
-        <Icon icon="lucide:arrow-left" width="20" height="20" />
+        <Icon icon="lucide:arrow-left" class="w-5 h-5" />
       </NuxtLink>
     </div>
 
@@ -845,8 +845,10 @@ function saveDataSettings() {
                 <!--#endregion-->
               </div>
               <div class="flex justify-end mt-4">
-                <button class="bg-gray-200 px-4 py-2 rounded" @click="closeModal">
-                </button>
+                <button
+                  class="bg-gray-200 px-4 py-2 rounded"
+                  @click="closeModal"
+                ></button>
                 <!--#endregion-->
               </div>
             </div>
