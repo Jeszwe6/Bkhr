@@ -1,199 +1,290 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { Icon } from "@iconify/vue";
+import { useRouter } from "vue-router";
 
-// لیست محصولات اضافه شده
+// ==================== TYPES ====================
 interface ProductItem {
   name: string;
   quantity: number;
   unit: string;
 }
+interface Contact {
+  id: number;
+  name: string;
+  avatar: string;
+  online: boolean;
+  selected?: boolean;
+}
 
-const productList = ref<ProductItem[]>([]);
+// ==================== STATE ====================
+const router = useRouter();
 
-// واحدها
 const units = ["کیلو", "عدد", "پاکت", "جعبه"];
 
-// input جدید
-const newItem = reactive({
-  name: "",
-  quantity: 1,
-  unit: units[0], // همیشه مقدار string پیش‌فرض
-});
-
-// کنترل نمایش input جدید
-const addingItem = ref(false);
-
-// کنترل باز شدن منوها
-const contactsOpen = ref(false);
-const menuOpen = ref(false);
-
-// نمونه مخاطبین آنلاین
-const contacts = ref([
-  { id: 1, name: "علی", online: true },
-  { id: 2, name: "سارا", online: false },
-  { id: 3, name: "مریم", online: true },
+const productList = ref<ProductItem[]>([
+  { name: "نان بربری", quantity: 2, unit: "عدد" },
 ]);
 
-// اضافه کردن آیتم به لیست
-const addItem = () => {
+const newItem = reactive<ProductItem>({
+  name: "",
+  quantity: 1,
+  unit: units[0] ?? "عدد", // 👈 مقدار پیش‌فرض امن
+});
+
+const addingItem = ref(false);
+
+const sendSheetOpen = ref(false);
+const sheetHeight = ref(55);
+const contactSearch = ref("");
+const messageText = ref("");
+
+const contacts = ref<Contact[]>([
+  { id: 1, name: "علی", avatar: "https://i.pravatar.cc/150?img=1", online: true },
+  { id: 2, name: "سارا", avatar: "https://i.pravatar.cc/150?img=2", online: false },
+  { id: 3, name: "مریم", avatar: "https://i.pravatar.cc/150?img=3", online: true },
+  { id: 4, name: "رضا", avatar: "https://i.pravatar.cc/150?img=4", online: true },
+]);
+
+// ==================== COMPUTED ====================
+const filteredContacts = computed<Contact[]>(() => {
+  const q = contactSearch.value.trim();
+  if (!q) return contacts.value;
+  return contacts.value.filter((c) => c.name.includes(q));
+});
+
+const selectedContacts = computed<Contact[]>(() =>
+  contacts.value.filter((c) => c.selected)
+);
+
+// ==================== FUNCTIONS ====================
+function addItem(): void {
   if (!newItem.name.trim()) return;
 
   productList.value.push({
-    name: newItem.name,
+    name: newItem.name.trim(),
     quantity: newItem.quantity,
-    unit: newItem.unit as string, // ⚡ assertion برای TypeScript
+    unit: newItem.unit || (units[0] ?? "عدد"),
   });
 
-  // ریست کردن input
-  newItem.name = "";
-  newItem.quantity = 1;
-  newItem.unit = units[0];
-  addingItem.value = false;
-};
+  // Reset safely
+  setTimeout(() => {
+    newItem.name = "";
+    newItem.quantity = 1;
+    newItem.unit = units[0] ?? "عدد";
+    addingItem.value = false;
+  }, 0);
+}
 
-// حذف آیتم
-const removeItem = (index: number) => {
-  productList.value.splice(index, 1);
-};
+function removeItem(index: number): void {
+  if (index >= 0 && index < productList.value.length) {
+    productList.value.splice(index, 1);
+  }
+}
+
+function toggleContact(id: number): void {
+  const contact = contacts.value.find((c) => c.id === id);
+  if (contact) {
+    contact.selected = !contact.selected;
+    contacts.value = [...contacts.value]; // trigger reactivity
+  }
+}
+
+function sendToSelected(): void {
+  if (!selectedContacts.value.length) {
+    alert("لطفاً حداقل یک مخاطب انتخاب کنید.");
+    return;
+  }
+  console.log("ارسال به:", selectedContacts.value.map((c) => c.name));
+  contacts.value.forEach((c) => (c.selected = false));
+  sendSheetOpen.value = false;
+}
+
+// ==================== NAVIGATION ====================
+function goToHome(): void {
+  router.push("/home");
+}
+function goToOrders(): void {
+  router.push("/orders");
+}
+function goToHistory(): void {
+  router.push("/history");
+}
+function alertMore(): void {
+  alert("بیشتر...");
+}
 </script>
 
 <template>
   <div dir="rtl" class="min-h-screen bg-gray-50 relative pb-24">
-    <!-- Header -->
+    <!-- HEADER -->
     <header
       class="flex justify-between items-center p-4 shadow-sm bg-white sticky top-0 z-20"
     >
       <div class="flex items-center gap-3">
-        <!-- Contacts -->
-        <div class="relative">
-          <button
-            @click="contactsOpen = !contactsOpen"
-            class="p-2 rounded-full hover:bg-gray-100 transition"
-          >
-            <Icon icon="lucide:users" class="w-6 h-6 text-black" />
-          </button>
-          <transition name="fade-slide">
-            <ul
-              v-show="contactsOpen"
-              class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-xl overflow-hidden z-50"
-            >
-              <li
-                v-for="c in contacts"
-                :key="c.id"
-                class="px-4 py-2 flex justify-between items-center hover:bg-gray-100 cursor-pointer"
-              >
-                {{ c.name }}
-                <span
-                  :class="c.online ? 'bg-green-500' : 'bg-gray-400'"
-                  class="w-3 h-3 rounded-full"
-                ></span>
-              </li>
-            </ul>
-          </transition>
-        </div>
-
-        <!-- History -->
-        <button class="p-2 rounded-full hover:bg-gray-100 transition">
-          <Icon icon="lucide:clock" class="w-6 h-6 text-black" />
+        <button @click="goToHome" class="p-2 rounded-full hover:bg-gray-100 transition">
+          <Icon icon="lucide:home" class="w-6 h-6" />
         </button>
-
-        <!-- Menu 3 نقطه -->
-        <div class="relative">
-          <button
-            @click="menuOpen = !menuOpen"
-            class="p-2 rounded-full hover:bg-gray-100 transition"
-          >
-            <Icon icon="lucide:more-vertical" class="w-6 h-6 text-black" />
-          </button>
-          <transition name="fade-slide">
-            <ul
-              v-show="menuOpen"
-              class="absolute right-0 mt-2 w-36 bg-white shadow-lg rounded-xl overflow-hidden z-50"
-            >
-              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">تنظیمات</li>
-              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">حذف همه</li>
-              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">راهنما</li>
-            </ul>
-          </transition>
-        </div>
+        <button @click="goToOrders" class="p-2 rounded-full hover:bg-gray-100 transition">
+          <Icon icon="lucide:send" class="w-6 h-6" />
+        </button>
+        <button @click="goToHistory" class="p-2 rounded-full hover:bg-gray-100 transition">
+          <Icon icon="lucide:clock" class="w-6 h-6" />
+        </button>
+        <button @click="alertMore" class="p-2 rounded-full hover:bg-gray-100 transition">
+          <Icon icon="lucide:more-vertical" class="w-6 h-6" />
+        </button>
       </div>
+
+      <button
+        @click="sendSheetOpen = true"
+        class="bg-black text-white px-3 py-2 rounded-full flex items-center gap-2 hover:scale-105 transition"
+      >
+        <Icon icon="lucide:send" class="w-5 h-5" />
+        ارسال برای
+      </button>
     </header>
 
-    <!-- لیست محصولات -->
-    <main class="px-4 mt-4 flex flex-col gap-3">
-      <!-- آیتم‌ها -->
-      <div
-        v-for="(item, index) in productList"
-        :key="index"
-        class="bg-white rounded-xl shadow-md p-4 flex justify-between items-center transition hover:scale-[1.03]"
-      >
-        <div class="flex items-center gap-3">
-          <Icon icon="lucide:package" class="w-6 h-6 text-gray-700" />
-          <div>
-            <div class="font-semibold text-gray-800">{{ item.name }}</div>
-            <div class="text-sm text-gray-500">{{ item.quantity }} {{ item.unit }}</div>
-          </div>
-        </div>
-        <button
-          @click="removeItem(index)"
-          class="text-red-500 hover:text-red-700 transition"
+    <!-- PRODUCT LIST -->
+    <main class="px-4 mt-4 flex flex-col gap-3 pb-16">
+      <transition-group name="list-fade" tag="div">
+        <div
+          v-for="(item, index) in productList"
+          :key="index"
+          class="bg-white rounded-xl shadow-md p-4 flex justify-between items-center transition-all"
         >
-          <Icon icon="lucide:trash-2" class="w-5 h-5" />
-        </button>
-      </div>
+          <div class="flex items-center gap-3">
+            <Icon icon="lucide:package" class="w-6 h-6 text-gray-700" />
+            <div>
+              <div class="font-semibold text-gray-800">{{ item.name }}</div>
+              <div class="text-sm text-gray-500">
+                {{ item.quantity }} {{ item.unit }}
+              </div>
+            </div>
+          </div>
+          <button
+            @click="removeItem(index)"
+            class="text-red-500 hover:text-red-700 transition"
+          >
+            <Icon icon="lucide:trash-2" class="w-5 h-5" />
+          </button>
+        </div>
+      </transition-group>
 
-      <!-- Input جدید -->
+      <!-- افزودن آیتم جدید -->
       <transition name="fade-slide">
         <div
           v-if="addingItem"
-          class="bg-white rounded-xl shadow-md p-4 flex flex-wrap gap-3 items-center"
+          class="bg-white rounded-xl shadow p-4 flex flex-wrap gap-3 items-center"
         >
           <input
             v-model="newItem.name"
             placeholder="نام محصول"
-            class="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
+            class="flex-1 border rounded-lg px-3 py-2 focus:ring focus:ring-gray-300"
           />
           <input
             v-model.number="newItem.quantity"
             type="number"
             min="1"
-            class="w-24 border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
+            class="w-24 border rounded-lg px-3 py-2 focus:ring focus:ring-gray-300"
           />
           <select
             v-model="newItem.unit"
-            class="border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-gray-300"
+            class="border rounded-lg px-3 py-2 focus:ring focus:ring-gray-300"
           >
             <option v-for="u in units" :key="u" :value="u">{{ u }}</option>
           </select>
           <button
             @click="addItem"
-            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition shadow-md"
+            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
           >
             افزودن
           </button>
         </div>
       </transition>
     </main>
+    <!-- ✅ BOTTOM FOOTER -->
+    <BottomFooter />
 
-    <!-- دکمه + چسبیده پایین -->
-    <button
-      @click="addingItem = true"
-      class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black text-white p-5 rounded-full shadow-xl hover:scale-110 active:scale-95 transition-transform z-50"
-    >
-      <Icon icon="lucide:plus" class="w-6 h-6" />
-    </button>
+    <!-- SEND SHEET -->
+    <transition name="sheet">
+      <div
+        v-if="sendSheetOpen"
+        class="fixed left-0 bottom-0 w-full bg-white rounded-t-3xl shadow-2xl z-50 flex flex-col overflow-hidden"
+        :style="{ height: sheetHeight + 'vh' }"
+      >
+        <div class="w-16 h-2 bg-gray-300 rounded-full self-center mt-3 cursor-grab"></div>
+
+        <div class="flex-1 overflow-y-auto p-4">
+          <input
+            v-model="contactSearch"
+            placeholder="جستجو..."
+            class="w-full mb-4 border rounded-xl px-3 py-2 focus:ring focus:ring-gray-300"
+          />
+          <div class="grid grid-cols-3 gap-3">
+            <div
+              v-for="c in filteredContacts"
+              :key="c.id"
+              class="flex flex-col items-center cursor-pointer"
+              @click="toggleContact(c.id)"
+            >
+              <div class="relative">
+                <img
+                  :src="c.avatar ?? ''"
+                  class="w-16 h-16 rounded-full border-2 transition"
+                  :class="c.selected ? 'border-blue-500' : 'border-transparent'"
+                />
+                <span
+                  v-if="c.selected"
+                  class="absolute inset-0 flex justify-center items-center"
+                >
+                  <Icon icon="lucide:check-circle" class="w-6 h-6 text-blue-500" />
+                </span>
+              </div>
+              <span class="mt-1 text-sm">{{ c.name }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 border-t border-gray-200">
+          <button
+            @click="sendToSelected"
+            class="w-full bg-black text-white py-3 rounded-full hover:scale-105 transition"
+          >
+            ارسال
+          </button>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <style scoped>
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 .fade-slide-enter-from,
 .fade-slide-leave-to {
   opacity: 0;
-  transform: translateY(-6px);
+  transform: translateY(10px);
+}
+.list-fade-enter-active,
+.list-fade-leave-active {
+  transition: all 0.25s ease-in-out;
+}
+.list-fade-enter-from,
+.list-fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.sheet-enter-active,
+.sheet-leave-active {
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+.sheet-enter-from,
+.sheet-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
 }
 </style>

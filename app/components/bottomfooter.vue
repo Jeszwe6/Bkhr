@@ -1,12 +1,12 @@
 <template>
   <div class="fixed bottom-0 left-0 w-full z-50">
     <div
-      class="relative flex justify-between items-center bg-white  border border-gray-200 rounded-t-3xl h-16 px-4 shadow-lg"
+      class="relative flex justify-between items-center bg-white border border-gray-300 rounded-t-3xl h-16 px-4 shadow-sm"
     >
       <!-- Home -->
       <NuxtLink
         to="/home"
-        class="flex flex-col items-center justify-center w-16 h-16 cursor-pointer transform transition-transform duration-200 hover:-translate-y-1 active:scale-90"
+        class="flex flex-col items-center justify-center w-16 h-16 text-[#101010] cursor-pointer transform transition-transform duration-200 hover:-translate-y-1 active:scale-90"
       >
         <Icon name="lucide:house" class="w-5 h-5" />
       </NuxtLink>
@@ -14,17 +14,17 @@
       <!-- دکمه وسط -->
       <NuxtLink
         to="/addlist"
-        class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-black text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-transform duration-200"
+        class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-[#101010] text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-transform duration-200"
       >
         <Icon name="lucide:plus" class="w-8 h-8" />
       </NuxtLink>
 
-      <!-- Profile -->
+      <!-- orders -->
       <NuxtLink
-        to="/profile"
-        class="flex flex-col items-center justify-center w-16 h-16 cursor-pointer transform transition-transform duration-200 hover:-translate-y-1 active:scale-90"
+        to="/orders"
+        class="flex flex-col items-center justify-center text-[#101010] w-16 h-16 cursor-pointer transform transition-transform duration-200 hover:-translate-y-1 active:scale-90"
       >
-        <Icon name="lucide:user-round" class="w-5 h-5"/>
+        <Icon name="lucide:shopping-cart" class="w-5 h-5" />
       </NuxtLink>
     </div>
   </div>

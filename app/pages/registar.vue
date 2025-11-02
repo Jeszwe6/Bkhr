@@ -65,7 +65,7 @@ const submitForm = () => {
     <div
       class="relative w-screen h-screen bg-white flex flex-col justify-center items-center p-6"
     >
-      <h1 class="text-3xl font-bold mb-6">ثبت‌ نام</h1>
+      <h1 class="text-3xl font-bold mb-6 dark:text-black">ثبت‌ نام</h1>
       <!--#region-Register-Form-->
       <div class="w-full max-w-sm space-y-4">
         <!--#region-User-Name -->
@@ -77,7 +77,7 @@ const submitForm = () => {
             type="text"
             v-model="name"
             placeholder="نام"
-            class="flex-1 bg-transparent outline-none"
+            class="flex-1 bg-transparent outline-none dark:text-gray-700"
           />
         </div>
         <!--#endregion-->
@@ -90,7 +90,7 @@ const submitForm = () => {
             type="email"
             v-model="email"
             placeholder="ایمیل"
-            class="flex-1 bg-transparent outline-none"
+            class="flex-1 bg-transparent outline-none dark:text-gray-700"
           />
         </div>
         <!--#endregion-->
@@ -105,13 +105,13 @@ const submitForm = () => {
             :type="showPassword ? 'text' : 'password'"
             v-model="password"
             placeholder="رمز عبور"
-            class="flex-1 bg-transparent outline-none pr-2"
+            class="flex-1 bg-transparent outline-none pr-2 dark:text-gray-700"
           />
           <!--#region-Visiable-Icon-->
           <button
             type="button"
             @click="togglePassword"
-            class="absolute left-3 text-gray-700 focus:outline-none"
+            class="absolute left-3 text-gray-700 focus:outline-none "
           >
             <Icon
               v-if="!showPassword"
@@ -133,7 +133,7 @@ const submitForm = () => {
             :type="showConfirmPassword ? 'text' : 'password'"
             v-model="confirmPassword"
             placeholder="تأیید رمز عبور"
-            class="flex-1 bg-transparent outline-none pr-2"
+            class="flex-1 bg-transparent outline-none pr-2 dark:text-gray-700"
           />
           <button
             type="button"
@@ -172,7 +172,7 @@ const submitForm = () => {
         <button
           :disabled="!isFormValid"
           @click="submitForm"
-          class="w-80 h-12 absolute bottom-22 left-1/2 transform -translate-x-1/2 bg-black text-white px-8 py-3 rounded-full flex items-center justify-center"
+          class="w-80 h-12 absolute bottom-22 left-1/2 transform -translate-x-1/2 bg-[#101010] text-white px-8 py-3 rounded-full flex items-center justify-center"
         >
           ثبت‌ نام
         </button>
@@ -215,7 +215,7 @@ const submitForm = () => {
               </div>
               <button
                 @click="acceptRules"
-                class="bg-black text-white font-bold px-6 py-2 rounded-full mt-6 w-full"
+                class="bg-[#101010] text-white font-bold px-6 py-2 rounded-full mt-6 w-full"
               >
                 قبول میکنم
               </button>

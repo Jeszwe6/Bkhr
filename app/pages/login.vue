@@ -60,11 +60,11 @@ const sendRecovery = () => {
     <div
       class="relative w-screen h-screen bg-white flex flex-col justify-center items-center p-6"
     >
-      <h1 class="text-3xl font-bold mb-6"> ورود</h1>
+      <h1 class="text-3xl font-bold mb-6 dark:text-black">ورود</h1>
       <!--#region-Register-Form-->
       <div class="w-full max-w-sm space-y-4">
         <!--#region-User-Name-Field-->
-        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2  shadow-sm">
+        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2 shadow-sm">
           <!--#region-User-Name-Icon -->
           <Icon class="text-gray-700 ml-2" name="lucide:user-round" size="20" />
           <!--#endregion-->
@@ -72,13 +72,15 @@ const sendRecovery = () => {
             type="text"
             v-model="name"
             placeholder="نام"
-            class="flex-1 bg-transparent outline-none"
+            class="flex-1 bg-transparent outline-none dark:text-gray-700"
           />
         </div>
         <!--#endregion-->
 
         <!--#region-Password-Field-->
-        <div class="flex items-center bg-[#eee] rounded-full px-4 py-2 relative  shadow-sm">
+        <div
+          class="flex items-center bg-[#eee] rounded-full px-4 py-2 relative shadow-sm"
+        >
           <!--#region-Password-Icon-->
           <Icon class="text-gray-700 ml-2" name="lucide:lock-open" size="20" />
           <!--#endregion-->
@@ -86,7 +88,7 @@ const sendRecovery = () => {
             :type="showPassword ? 'text' : 'password'"
             v-model="password"
             placeholder="رمز عبور"
-            class="flex-1 bg-transparent outline-none pr-2"
+            class="flex-1 bg-transparent outline-none pr-2 dark:text-gray-700"
           />
           <!--#region-Visiable-Icon-->
           <button
@@ -112,7 +114,7 @@ const sendRecovery = () => {
       <div class="flex items-center justify-between mt-3">
         <label class="flex items-center space-x-1">
           <input type="checkbox" class="circle" v-model="rememberMe" />
-          <span class="text-sm ml-8">مرا به خاطر بسپار</span>
+          <span class="text-sm ml-8 dark:text-black">مرا به خاطر بسپار</span>
         </label>
 
         <button @click="openModal" class="text-yellow-300 text-sm underline mr-5">
@@ -123,7 +125,7 @@ const sendRecovery = () => {
 
       <!--#region-Register-Link-->
       <p class="text-sm mt-2 text-center">
-        <NuxtLink to="/register" class="text-yellow-300 underline">
+        <NuxtLink to="/registar" class="text-yellow-300 underline">
           حساب کاربری ندارید؟
         </NuxtLink>
       </p>
@@ -133,8 +135,8 @@ const sendRecovery = () => {
       <button
         :disabled="!isFormValid"
         @click="submitForm"
-         to="/home"
-        class="w-80 h-12 bg-black text-white flex justify-center items-center rounded-full absolute bottom-22 left-1/2 transform -translate-x-1/2 transition-all duration-300 hover:bg-[#333] disabled:opacity-50 disabled:cursor-not-allowed"
+        to="/home"
+        class="w-80 h-12 bg-[#101010] text-white flex justify-center items-center rounded-full absolute bottom-22 left-1/2 transform -translate-x-1/2 transition-all duration-300 hover:bg-[#333] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         ورود
       </button>
@@ -154,7 +156,7 @@ const sendRecovery = () => {
             <input
               type="email"
               placeholder="ایمیل"
-              class="w-full bg-gray-100 rounded-full px-4 py-2 mb-4 focus:outline-none"
+              class="w-full bg-gray-100  dark:text-gray-700 rounded-full px-4 py-2 mb-4 focus:outline-none"
               v-model="recoveryEmail"
             />
             <button

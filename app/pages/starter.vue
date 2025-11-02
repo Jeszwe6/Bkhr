@@ -67,7 +67,7 @@ const prevSlide = () => {
         <div class="text-xl text-center px-4 leading-relaxed transition-all duration-500">
           <!-- Slide 1 -->
           <div v-if="current === 0">
-            <div class="mb-3 flex">
+            <div class="mb-3 flex dark:text-black">
               بیاید
               <span
                 class="transform bg-yellow-300 text-black px-2 mx-2 font-bold rotate-5"
@@ -76,7 +76,7 @@ const prevSlide = () => {
               </span>
               را کم کنیم
             </div>
-            <div class="mb-3 flex">
+            <div class="mb-3 flex dark:text-black">
               <span
                 class="transform bg-yellow-300 text-black px-2 mx-2 font-bold -rotate-5"
               >
@@ -84,7 +84,7 @@ const prevSlide = () => {
               </span>
               سفارش دهید
             </div>
-            <div class="mb-3 flex">
+            <div class="mb-3 flex dark:text-black">
               دیگر
               <span
                 class="transform bg-yellow-300 text-black px-2 mx-2 font-bold rotate-5"
@@ -97,7 +97,7 @@ const prevSlide = () => {
 
           <!-- Slide 2 -->
           <div v-else-if="current === 1">
-            <div class="mb-3 flex">
+            <div class="mb-3 flex dark:text-black">
               فقط با یک
               <span
                 class="transform bg-yellow-300 text-black px-2 mx-2 font-bold rotate-5"
@@ -110,7 +110,7 @@ const prevSlide = () => {
           <!-- Slide 3 -->
           <div
             v-else-if="current === 2"
-            class="flex flex-col items-center space-y-3 text-center"
+            class="flex flex-col items-center space-y-3 text-center dark:text-black"
           >
             <div>سفارش دهید</div>
 
@@ -137,7 +137,7 @@ const prevSlide = () => {
           </div>
 
           <!-- Slide 4 -->
-          <div v-else-if="current === 3">
+          <div v-else-if="current === 3" class="dark:text-black">
             آماده‌اید؟<br />
             همین حالا ثبت‌نام کنید و شروع کنید!
           </div>

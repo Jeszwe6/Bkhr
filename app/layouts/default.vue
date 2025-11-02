@@ -1,13 +1,6 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-<div>
-  <slot/>
-</div>
+  <div>
+    <slot />
+    <bottomfooter />
+  </div>
 </template>
-
-<style scoped>
-
-</style>
