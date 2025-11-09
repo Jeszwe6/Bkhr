@@ -1,6 +1,6 @@
 <script setup>
 //#region-Imports
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { navigateTo } from "#app";
 //#endregion
 
@@ -65,14 +65,12 @@ const submitForm = () => {
     <div
       class="relative w-screen h-screen bg-white flex flex-col justify-center items-center p-6"
     >
-      <h1 class="text-3xl font-bold mb-6 dark:text-black">ثبت‌ نام</h1>
+      <h1 class="text-3xl font-bold mb-6 dark:text-[#121212]">ثبت‌ نام</h1>
       <!--#region-Register-Form-->
       <div class="w-full max-w-sm space-y-4">
         <!--#region-User-Name -->
         <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 shadow-sm">
-          <!--#region-User-Name-Icon -->
           <Icon class="text-gray-700 ml-2" name="lucide:user-round" size="20" />
-          <!--#endregion-->
           <input
             type="text"
             v-model="name"
@@ -80,12 +78,10 @@ const submitForm = () => {
             class="flex-1 bg-transparent outline-none dark:text-gray-700"
           />
         </div>
-        <!--#endregion-->
+
         <!--#region-mail-->
         <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 shadow-sm">
-          <!--#region-Email-Icon-->
           <Icon class="text-gray-700 ml-2" name="lucide:mail" size="20" />
-          <!--#endregion-->
           <input
             type="email"
             v-model="email"
@@ -93,25 +89,20 @@ const submitForm = () => {
             class="flex-1 bg-transparent outline-none dark:text-gray-700"
           />
         </div>
-        <!--#endregion-->
+
         <!--#region-Password-->
-        <div
-          class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative shadow-sm"
-        >
-          <!--#region-Password-Icon-->
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative shadow-sm">
           <Icon class="text-gray-700 ml-2" name="lucide:lock-open" size="20" />
-          <!--#endregion-->
           <input
             :type="showPassword ? 'text' : 'password'"
             v-model="password"
             placeholder="رمز عبور"
             class="flex-1 bg-transparent outline-none pr-2 dark:text-gray-700"
           />
-          <!--#region-Visiable-Icon-->
           <button
             type="button"
             @click="togglePassword"
-            class="absolute left-3 text-gray-700 focus:outline-none "
+            class="absolute left-3 text-gray-700 focus:outline-none"
           >
             <Icon
               v-if="!showPassword"
@@ -121,13 +112,10 @@ const submitForm = () => {
             />
             <Icon v-else class="text-gray-700" name="lucide:eye-off" size="20" />
           </button>
-          <!--#endregion-->
         </div>
-        <!--#endregion-->
+
         <!--#region Confirm-Password-->
-        <div
-          class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative shadow-sm"
-        >
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 relative shadow-sm">
           <Icon class="text-gray-700 ml-2" name="lucide:lock-open" size="20" />
           <input
             :type="showConfirmPassword ? 'text' : 'password'"
@@ -149,85 +137,83 @@ const submitForm = () => {
             <Icon v-else class="text-gray-700" name="lucide:eye-off" size="20" />
           </button>
         </div>
-        <!--#endregion-->
-        <!--#region-Ruls-And-Regulations-->
+
+        <!--#region-Rules-->
         <div class="flex items-center justify-center mt-3 space-x-2">
           <input type="checkbox" id="rules" class="circle" v-model="agreeRules" />
-          <label for="rules" class="text-sm text-center text-black">
-            <button class="bg-yellow-300 p-1 rotate-5" @click="openModal">
+          <label for="rules" class="text-sm text-center text-[#121212]">
+            <button class="bg-yellow-400 p-1 rotate-5" @click="openModal">
               قوانین و مقررات
             </button>
             را قبول می‌کنم
           </label>
         </div>
-        <!--#endregion-->
+
         <!--#region-Login-Link-->
         <p class="text-sm mt-2 text-center">
-          <router-link to="/login" class="text-yellow-300 underline">
+          <router-link to="/login" class="text-yellow-400 underline">
             حساب کاربری دارم
           </router-link>
         </p>
-        <!--#endregion-->
-        <!--#region-Sign-In-Button-->
-        <button
-          :disabled="!isFormValid"
-          @click="submitForm"
-          class="w-80 h-12 absolute bottom-22 left-1/2 transform -translate-x-1/2 bg-[#101010] text-white px-8 py-3 rounded-full flex items-center justify-center"
-        >
-          ثبت‌ نام
-        </button>
-        <!--#endregion-->
-        <!--#region-Ruls-Drawer-->
-        <transition name="fade">
-          <div
-            v-if="showModal"
-            class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-          >
-            <div
-              class="bg-white rounded-2xl p-6 w-80 max-h-[80vh] overflow-y-auto text-right shadow-lg"
-            >
-              <h2 class="text-lg font-bold mb-4 text-center">قوانین و مقررات</h2>
-              <div class="text-sm text-gray-700 leading-relaxed space-y-3">
-                <p>
-                  به اپلیکیشن ما خوش آمدید. لطفاً پیش از ثبت‌نام و استفاده از خدمات، این
-                  قوانین و مقررات را با دقت مطالعه کنید.
-                </p>
-                <p>
-                  ۱. پذیرش قوانین: با ایجاد حساب کاربری و استفاده از اپلیکیشن، کاربر متعهد
-                  می‌شود که تمامی قوانین را پذیرفته و به آن‌ها پایبند باشد.
-                </p>
-                <p>
-                  ۲. ثبت‌نام و حساب کاربری: کاربران موظف‌اند اطلاعات صحیح، کامل و به‌روز
-                  خود را هنگام ثبت‌نام وارد کنند.
-                </p>
-                <p>
-                  ۳. حفظ حریم خصوصی: اطلاعات شخصی کاربران محرمانه تلقی شده و بدون رضایت
-                  آن‌ها در اختیار شخص ثالث قرار نخواهد گرفت.
-                </p>
-                <p>
-                  ۴. استفاده مجاز از خدمات: کاربران متعهد می‌شوند که از خدمات اپلیکیشن فقط
-                  در چارچوب قوانین استفاده کنند.
-                </p>
-                <p>
-                  ۵. مسئولیت کاربران: مسئولیت تمام فعالیت‌های انجام‌شده در حساب کاربری بر
-                  عهده‌ی صاحب حساب است.
-                </p>
-              </div>
-              <button
-                @click="acceptRules"
-                class="bg-[#101010] text-white font-bold px-6 py-2 rounded-full mt-6 w-full"
-              >
-                قبول میکنم
-              </button>
-            </div>
-          </div>
-        </transition>
-        <!--#endregion-->
       </div>
       <!--#endregion-->
     </div>
   </transition>
-  <!--#endregion-->
+
+  <!-- دکمه ثبت‌نام - ثابت در پایین صفحه -->
+  <button
+    :disabled="!isFormValid"
+    @click="submitForm"
+    class="fixed bottom-8 left-1/2 transform -translate-x-1/2 w-80 h-12 bg-[#121212] text-white px-8 py-3 rounded-full flex items-center justify-center z-50"
+  >
+    ثبت‌ نام
+  </button>
+
+  <!-- Modal قوانین و مقررات -->
+  <transition name="fade">
+    <div
+      v-if="showModal"
+      class="fixed inset-0 bg-[#12121270] flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-2xl p-6 w-80 max-h-[80vh] overflow-y-auto text-right shadow-lg"
+      >
+        <h2 class="text-lg font-bold mb-4 text-center">قوانین و مقررات</h2>
+        <div class="text-sm text-[#121212] leading-relaxed space-y-3">
+          <p>
+            به اپلیکیشن ما خوش آمدید. لطفاً پیش از ثبت‌نام و استفاده از خدمات، این
+            قوانین و مقررات را با دقت مطالعه کنید.
+          </p>
+          <p>
+            ۱. پذیرش قوانین: با ایجاد حساب کاربری و استفاده از اپلیکیشن، کاربر
+            متعهد می‌شود که تمامی قوانین را پذیرفته و به آن‌ها پایبند باشد.
+          </p>
+          <p>
+            ۲. ثبت‌نام و حساب کاربری: کاربران موظف‌اند اطلاعات صحیح، کامل و به‌روز
+            خود را هنگام ثبت‌نام وارد کنند.
+          </p>
+          <p>
+            ۳. حفظ حریم خصوصی: اطلاعات شخصی کاربران محرمانه تلقی شده و بدون رضایت
+            آن‌ها در اختیار شخص ثالث قرار نخواهد گرفت.
+          </p>
+          <p>
+            ۴. استفاده مجاز از خدمات: کاربران متعهد می‌شوند که از خدمات اپلیکیشن
+            فقط در چارچوب قوانین استفاده کنند.
+          </p>
+          <p>
+            ۵. مسئولیت کاربران: مسئولیت تمام فعالیت‌های انجام‌شده در حساب کاربری بر
+            عهده‌ی صاحب حساب است.
+          </p>
+        </div>
+        <button
+          @click="acceptRules"
+          class="bg-[#121212] text-white font-bold px-6 py-2 rounded-full mt-6 w-full"
+        >
+          قبول میکنم
+        </button>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <style>
@@ -243,13 +229,10 @@ input[type="checkbox"].circle {
   position: relative;
   transition: all 0.2s ease;
 }
-/*#region-Styles-for-Checked-State*/
 input[type="checkbox"].circle:checked {
-  background-color: black;
-  border-color: black;
+  background-color: #121212;
+  border-color: #121212;
 }
-/*#endregion*/
-/*#region-Checkmark-Icon*/
 input[type="checkbox"].circle:checked::after {
   content: "✓";
   position: absolute;
@@ -259,8 +242,7 @@ input[type="checkbox"].circle:checked::after {
   color: white;
   font-weight: bold;
 }
-/*#endregion*/
-/*#endregion*/
+
 /* #region-Fade-Transition */
 .fade-enter-active,
 .fade-leave-active {

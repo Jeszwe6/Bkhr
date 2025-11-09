@@ -117,7 +117,7 @@ const sendRecovery = () => {
           <span class="text-sm ml-8 dark:text-black">مرا به خاطر بسپار</span>
         </label>
 
-        <button @click="openModal" class="text-yellow-300 text-sm underline mr-5">
+        <button @click="openModal" class="text-yellow-400 text-sm underline mr-5">
           رمز عبور خود را فراموش کردم
         </button>
       </div>
@@ -125,7 +125,7 @@ const sendRecovery = () => {
 
       <!--#region-Register-Link-->
       <p class="text-sm mt-2 text-center">
-        <NuxtLink to="/registar" class="text-yellow-300 underline">
+        <NuxtLink to="/registar" class="text-yellow-400 underline">
           حساب کاربری ندارید؟
         </NuxtLink>
       </p>
@@ -161,7 +161,7 @@ const sendRecovery = () => {
             />
             <button
               @click="sendRecovery"
-              class="bg-yellow-300 text-black font-bold px-6 py-2 rounded-full"
+              class="bg-yellow-400 text-[#121212] font-bold px-6 py-2 rounded-full"
             >
               ارسال
             </button>
@@ -181,7 +181,7 @@ input[type="checkbox"].circle {
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid black;
+  border: 2px solid #121212;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
@@ -190,8 +190,8 @@ input[type="checkbox"].circle {
 }
 
 input[type="checkbox"].circle:checked {
-  background-color: black;
-  border-color: black;
+  background-color: #121212;
+  border-color: #121212;
 }
 
 input[type="checkbox"].circle:checked::after {

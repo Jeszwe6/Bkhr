@@ -1,7 +1,7 @@
 <template>
   <!--#region-Main-Container-->
   <div
-    class="w-screen h-screen bg-white text-black relative flex flex-col justify-center items-center text-center"
+    class="w-screen h-screen bg-white text-[#121212] relative flex flex-col justify-center items-center text-center"
   >
     <!--#region-Logo-Welcome-Text-->
     <div class="flex flex-col items-center justify-center space-y-3">
@@ -16,7 +16,7 @@
     <!--#endregion-->
     <!--#region-Footer-->
     <div class="w-full text-center absolute bottom-5">
-      <p class="text-md mt-2">ساخته شده با 💜 توسط تیم کدینچی</p>
+      <p class="text-md mt-2">ساخته شده با 💜 توسط تیم کُدینچی</p>
       <p class="text-md mt-2">v.1.2</p>
     </div>
     <!--#endregion-->
@@ -35,7 +35,7 @@ onMounted(() => {
   if (window.location.pathname === "/" || window.location.pathname === "/index") {
     setTimeout(() => {
       router.replace("/starter"); // replace بهتر است تا Back باعث بازگشت به index نشود
-    }, 3000); // 3 ثانیه بعد هدایت
+    }, 5000); // 3 ثانیه بعد هدایت
   }
 });
 </script>

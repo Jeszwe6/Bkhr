@@ -1,30 +1,31 @@
-/*@tailwind base;*/
-/*@tailwind components;*/
-/*@tailwind utilities;*/
+/* 📦 ایمپورت پایه TailwindCSS و انیمیشن‌ها */
 @import "tailwindcss";
 @import "tw-animate-css";
-/*---break---*/
+
+/* 🎨 پشتیبانی از دارک مود جدید Tailwind 4 */
 @custom-variant dark (&:is(.dark *));
-body{
+
+/* 🌐 جهت‌دهی و فونت فارسی */
+body {
     direction: rtl;
     font-family: 'Estedad-FD-Light', Tahoma, Sans-Serif !important;
 }
 
-.dir-rtl{
+.dir-rtl {
     direction: rtl !important;
 }
 
-.dir-ltr{
+.dir-ltr {
     direction: ltr !important;
 }
 
-/*---break---*/
-
+/* 🎛️ تنظیمات تم و متغیرهای رنگی */
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
+
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -59,8 +60,7 @@ body{
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/*---break---*/
-
+/* 🌞 تم روشن (پیش‌فرض) */
 :root {
     --radius: 0.625rem;
     --background: oklch(1 0 0);
@@ -97,8 +97,7 @@ body{
     --sidebar-ring: oklch(0.708 0 0);
 }
 
-/*---break---*/
-
+/* 🌚 تم تاریک */
 .dark {
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
@@ -134,13 +133,13 @@ body{
     --sidebar-ring: oklch(0.439 0 0);
 }
 
-/*---break---*/
-
+/* 🌈 پایه‌های کلی Tailwind با متغیرهای تم */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    body {
+        @apply bg-background text-foreground;
     }
 }

@@ -110,16 +110,21 @@ orders.value[0]?.items.forEach((_, idx) => {
 </script>
 
 <template>
-  <div class="w-screen min-h-screen bg-white text-black flex flex-col">
+  <div class="w-screen min-h-screen bg-white text-[#121212] flex flex-col">
     <!-- Header -->
     <div class="top-bar flex justify-between items-center p-4 my-5">
       <div class="flex items-center gap-3">
-        <img
-          src="/img/Oval-10.png"
-          alt="پروفایل"
-          class="w-15 h-15 rounded-full border border-black"
-        />
-        <span class="font-semibold text-lg">سلام نرجس</span>
+        <NuxtLink
+          to="/profile"
+          class="p-2 rounded-full hover:bg-gray-100"
+          @click="bounce($event)"
+        >
+          <img
+            src="/img/Oval-1.png"
+            alt="پروفایل"
+            class="w-15 h-15 rounded-full border border-[#121212]"
+          />
+        </NuxtLink>
       </div>
 
       <div class="flex items-center gap-4">
@@ -127,7 +132,7 @@ orders.value[0]?.items.forEach((_, idx) => {
           @click="toggleNotifications($event)"
           class="relative p-2 rounded-full hover:bg-gray-100"
         >
-          <Icon name="lucide:bell" size="24" class="text-black" />
+          <Icon name="lucide:bell" size="24" class="text-[#121212]" />
           <span
             v-if="notifications.length"
             class="absolute top-0 -right-1 bg-red-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md"
@@ -141,7 +146,15 @@ orders.value[0]?.items.forEach((_, idx) => {
           class="p-2 rounded-full hover:bg-gray-100"
           @click="bounce($event)"
         >
-          <Icon name="lucide:clock" size="25" class="text-black" />
+          <Icon name="lucide:clock" size="25" class="text-[#121212]" />
+        </NuxtLink>
+
+        <NuxtLink
+          to="/setting"
+          class="p-2 rounded-full hover:bg-gray-100"
+          @click="bounce($event)"
+        >
+          <Icon name="lucide:settings-2" size="25" class="text-[#121212]" />
         </NuxtLink>
       </div>
     </div>
@@ -156,7 +169,7 @@ orders.value[0]?.items.forEach((_, idx) => {
         <li
           v-for="(n, i) in notifications"
           :key="i"
-          class="text-sm text-black p-2 rounded hover:bg-gray-100 transition"
+          class="text-sm text-[#121212] p-2 rounded hover:bg-gray-100 transition"
         >
           {{ n }}
         </li>
@@ -164,7 +177,7 @@ orders.value[0]?.items.forEach((_, idx) => {
     </div>
 
     <div class="orders-section px-4 mb-5">
-      <h2 class="font-bold mb-5 text-2xl">سفارش‌ها</h2>
+      <h2 class="font-bold mb-5 text-xl">لیست سفارش های من</h2>
 
       <!-- اسکرول افقی -->
       <div class="orders-scroller flex gap-6 overflow-x-auto pb-6 pr-2">
@@ -173,7 +186,7 @@ orders.value[0]?.items.forEach((_, idx) => {
           :key="order.id"
           class="order-card flex-none p-5 rounded-2xl shadow-md w-80 flex flex-col relative transition-colors duration-300 overflow-hidden"
           :class="{
-            'bg-black text-white': order.progress >= 100,
+            'bg-[#121212] text-white': order.progress >= 100,
             'bg-gray-100': order.progress < 100,
           }"
           style="height: 500px"
@@ -204,7 +217,7 @@ orders.value[0]?.items.forEach((_, idx) => {
           <div>
             <div class="w-full h-2 bg-gray-300 rounded-full overflow-hidden shadow-sm">
               <div
-                class="h-full bg-yellow-500 transition-all duration-300"
+                class="h-full bg-yellow-400 transition-all duration-300"
                 :style="{ width: order.progress + '%' }"
               ></div>
             </div>
@@ -245,15 +258,15 @@ orders.value[0]?.items.forEach((_, idx) => {
   position: absolute;
   width: 6px;
   height: 10px;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  border-right: 2px solid #121212;
+  border-bottom: 2px solid #121212;
   transform: rotate(45deg);
   right: 5px;
   top: 1px;
 }
 .custom-checkbox.inverted.checked::after {
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  border-right: 2px solid #121212;
+  border-bottom: 2px solid #121212;
 }
 
 /* Bounce Animation */

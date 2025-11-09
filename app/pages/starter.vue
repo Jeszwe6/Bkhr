@@ -67,27 +67,27 @@ const prevSlide = () => {
         <div class="text-xl text-center px-4 leading-relaxed transition-all duration-500">
           <!-- Slide 1 -->
           <div v-if="current === 0">
-            <div class="mb-3 flex dark:text-black">
+            <div class="mb-3 flex dark:text-[#121212]">
               بیاید
               <span
-                class="transform bg-yellow-300 text-black px-2 mx-2 font-bold rotate-5"
+                class="transform bg-yellow-400 text-[#121212] px-2 mx-2 font-bold rotate-5"
               >
                 مشکلات
               </span>
               را کم کنیم
             </div>
-            <div class="mb-3 flex dark:text-black">
+            <div class="mb-3 flex dark:text-[#121212]">
               <span
-                class="transform bg-yellow-300 text-black px-2 mx-2 font-bold -rotate-5"
+                class="transform bg-yellow-400 text-[#121212] px-2 mx-2 font-bold -rotate-5"
               >
                 به راحتی
               </span>
               سفارش دهید
             </div>
-            <div class="mb-3 flex dark:text-black">
+            <div class="mb-3 flex dark:text-[#121212]">
               دیگر
               <span
-                class="transform bg-yellow-300 text-black px-2 mx-2 font-bold rotate-5"
+                class="transform bg-yellow-400 text-[#121212] px-2 mx-2 font-bold rotate-5"
               >
                 فراموش
               </span>
@@ -97,10 +97,10 @@ const prevSlide = () => {
 
           <!-- Slide 2 -->
           <div v-else-if="current === 1">
-            <div class="mb-3 flex dark:text-black">
+            <div class="mb-3 flex dark:text-[#121212]">
               فقط با یک
               <span
-                class="transform bg-yellow-300 text-black px-2 mx-2 font-bold rotate-5"
+                class="transform bg-yellow-400 text-[#121212] px-2 mx-2 font-bold rotate-5"
               >
                 تیک
               </span>
@@ -110,12 +110,12 @@ const prevSlide = () => {
           <!-- Slide 3 -->
           <div
             v-else-if="current === 2"
-            class="flex flex-col items-center space-y-3 text-center dark:text-black"
+            class="flex flex-col items-center space-y-3 text-center dark:text-[#121212]"
           >
             <div>سفارش دهید</div>
 
             <div class="flex items-center justify-center">
-              <span class="transform bg-yellow-300 text-black px-2 font-bold -rotate-5">
+              <span class="transform bg-yellow-300 text-[#121212] px-2 font-bold -rotate-5">
                 خرید
               </span>
               <span class="mx-2">کنید</span>
@@ -128,7 +128,7 @@ const prevSlide = () => {
             <div class="flex items-center justify-center">
               <span>سفارش خود را آنلاین</span>
               <span
-                class="transform bg-yellow-300 text-black px-2 font-bold rotate-5 mx-2"
+                class="transform bg-yellow-400 text-[#121212] px-2 font-bold rotate-5 mx-2"
               >
                 پیگیری
               </span>
@@ -137,7 +137,7 @@ const prevSlide = () => {
           </div>
 
           <!-- Slide 4 -->
-          <div v-else-if="current === 3" class="dark:text-black">
+          <div v-else-if="current === 3" class="dark:text-[#121212]">
             آماده‌اید؟<br />
             همین حالا ثبت‌نام کنید و شروع کنید!
           </div>
@@ -156,7 +156,7 @@ const prevSlide = () => {
         <template v-if="current === slides.length - 1">
           <NuxtLink
             to="/registar"
-            class="w-80 h-12 absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black text-white px-8 py-3 rounded-full flex items-center justify-center"
+            class="w-80 h-12 absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-[#121212] text-white text-lg px-8 py-3 rounded-full flex items-center justify-center"
           >
             ثبت نام
           </NuxtLink>
@@ -168,7 +168,7 @@ const prevSlide = () => {
           <button
             v-if="current < slides.length - 1"
             @click="nextSlide"
-            class="w-12 h-12 aspect-square p-2 rounded-full shadow-lg bg-black flex items-center justify-center mr-5 mb-1"
+            class="w-12 h-12 aspect-square p-2 rounded-full shadow-lg bg-[#121212] flex items-center justify-center mr-5 mb-1"
           >
             <Icon class="text-gray-100 w-8 h-8" icon="lucide:arrow-right" />
           </button>
@@ -177,7 +177,7 @@ const prevSlide = () => {
           <button
             v-if="current > 0"
             @click="prevSlide"
-            class="w-12 h-12 aspect-square p-2 rounded-full shadow-lg bg-black flex items-center justify-center ml-5 mb-1"
+            class="w-12 h-12 aspect-square p-2 rounded-full shadow-lg bg-[#121212] flex items-center justify-center ml-5 mb-1"
           >
             <Icon class="text-gray-100 w-8 h-8" icon="lucide:arrow-left" />
           </button>

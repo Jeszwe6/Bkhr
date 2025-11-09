@@ -111,7 +111,7 @@ const onImageChange = (event) => {
           <input
             type="date"
             v-model="birthdate"
-            class="w-full p-2 text-gray-700 focus:outline-none [appearance:none] [&::-webkit-calendar-picker-indicator]:hidden"
+            class="w-full p-2 text-gray-700 focus:outline-none appearance:none [&::-webkit-calendar-picker-indicator]:hidden"
           />
         </div>
       </div>
