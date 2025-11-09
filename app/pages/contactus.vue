@@ -177,7 +177,7 @@ const sendLocation = () => {
         >
           <div
             :class="[
-              'inline-block p-3 rounded-2xl shadow max-w-[75%] break-words transition-all',
+              'inline-block p-3 rounded-2xl shadow max-w-[75%] transition-all',
               msg.from === 'user'
                 ? 'bg-yellow-300 text-black rounded-br-none'
                 : 'bg-gray-100 text-black rounded-bl-none',
@@ -213,7 +213,7 @@ const sendLocation = () => {
       class="flex items-center justify-center gap-3 p-3 bg-white border-t relative"
     >
       <!--#region Upload Button with Dropdown-->
-      <div class="relative flex-shrink-0" @click.stop>
+      <div class="relative shrink-0" @click.stop>
         <button
           @click="toggleUpload"
           type="button"
@@ -305,7 +305,7 @@ const sendLocation = () => {
       <!--#region Send Icon-->
       <button
         type="submit"
-        class="bg-black text-white p-2 w-10 h-10 rounded-full active:scale-95 transition-transform flex-shrink-0"
+        class="bg-black text-white p-2 w-10 h-10 rounded-full active:scale-95 transition-transform shrink-0"
       >
         <Icon name="lucide:arrow-up" class="w-5 h-5" />
       </button>

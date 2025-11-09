@@ -8,11 +8,10 @@ export default defineNuxtConfig({
 
   // ⚙️ تنظیمات کلی اپلیکیشن
   app: {
-    // 🧠 تنظیمات <head> (تایتل، متا، آیکون، viewport و ...)
     head: {
-      title: "بخر", // عنوان سایت در تب مرورگر
-      charset: "utf-8", // کدگذاری استاندارد فارسی/انگلیسی
-      viewport: "width=device-width, initial-scale=1", // واکنش‌گرا برای موبایل
+      title: "بخر",
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
       meta: [
         {
           name: "viewport",
@@ -22,48 +21,43 @@ export default defineNuxtConfig({
         { name: "HandheldFriendly", content: "true" },
         { name: "version", content: "0.1" },
       ],
-      // 🖼️ آیکون favicon سایت
       link: [{ rel: "icon", type: "image/png", href: "/img/favicon.png" }],
     },
 
-    // 🎞️ افکت انتقال بین صفحات (با نام کلاس "page")
     pageTransition: { name: "page", mode: "out-in" },
-
-    // 🧩 افکت تغییر بین layout ها (اختیاری)
     layoutTransition: { name: "layout", mode: "out-in" },
   },
 
-  // ⚡️ چون پروژه فقط سمت کلاینت ران میشه (SPA) — SSR خاموشه
+  // ⚡️ پروژه SPA (SSR خاموش)
   ssr: false,
 
-  // 🧰 ابزار توسعه غیرفعاله (درصورت نیاز میشه فعال کرد)
+  // 🧰 Devtools (درصورت نیاز فعال می‌کنیم)
   devtools: { enabled: false },
 
-  // 📦 ماژول‌های فعال پروژه
-  modules: [
-    "cap-module", // افزونه‌ی مخصوص Capacitor یا PWA (در صورت استفاده)
-    "@nuxt/ui", // فریم‌ورک کامپوننت‌های UI آماده برای Nuxt
-    "nuxt-marquee", // برای ساخت marquee (اسلاید متحرک متن)
-    // ❌ nuxt-icon حذف شده چون با Nuxt 4 ناسازگاره
-  ],
+  // 📦 ماژول‌های پروژه
+  modules: ["cap-module", "@nuxt/ui", "nuxt-marquee"],
 
-  // 🎨 فایل‌های CSS سراسری پروژه
+  // 🎨 فایل‌های CSS سراسری
   css: [
-    "@/assets/css/main.css", // استایل‌های اصلی پروژه
-    "@/assets/css/font.css", // فونت‌ها و تنظیمات تایپوگرافی
-    // ✅ پیشنهاد: فایل tailwind.css رو هم اضافه کن تا در همه صفحات باشه
+    "@/assets/css/main.css",
+    "@/assets/css/font.css",
     "@/assets/css/tailwind.css",
   ],
 
-  // ⚙️ پیکربندی Vite (ابزار build)
+  // ⚙️ پیکربندی Vite برای HMR و Tailwind
   vite: {
-    plugins: [
-      tailwindcss(), // اجرای پلاگین TailwindCSS در Vite
-    ],
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        usePolling: true, // فعال کردن polling برای شناسایی تغییرات
+        interval: 100,    // بررسی تغییرات هر 100 میلی‌ثانیه
+      },
+      hmr: true,          // Hot Module Replacement فعال
+    },
   },
 
-  // 🌐 تنظیمات سرور محلی توسعه
+  // 🌐 تنظیمات سرور توسعه
   devServer: {
-    port: 2000, // آدرس پروژه در مرورگر: http://localhost:2000
+    port: 2000,
   },
 });

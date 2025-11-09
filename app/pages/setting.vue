@@ -134,13 +134,13 @@ function saveDataSettings() {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen bg-white text-black">
+  <div class="flex flex-col h-screen bg-white text-[#222]">
     <!-- Header -->
     <div class="flex justify-between items-center px-4 py-5 shadow-sm mb-8">
       <h2 class="font-bold text-xl">تنظیمات</h2>
       <NuxtLink
         to="/home"
-        class="bg-black text-white rounded-full w-10 h-10 p-2 flex items-center justify-center"
+        class="bg-[#222] text-white rounded-full w-10 h-10 p-2 flex items-center justify-center"
       >
         <Icon icon="lucide:arrow-left" class="w-5 h-5" />
       </NuxtLink>
@@ -168,7 +168,7 @@ function saveDataSettings() {
             >
               <input type="checkbox" v-model="settings.darkMode" class="sr-only peer" />
               <div
-                class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-black transition-all"
+                class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-[#222] transition-all"
               ></div>
               <div
                 class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full peer-checked:translate-x-full transition-transform shadow"
@@ -262,7 +262,7 @@ function saveDataSettings() {
       </ul>
 
       <!-- Footer text -->
-      <div class="p-4 text-center text-black leading-relaxed">
+      <div class="p-4 text-center text-[#222] leading-relaxed">
         <p class="text-md mt-2">ساخته شده با 💜 توسط تیم کُدینچی</p>
         <p class="text-md mt-2 mb-4">v.1.2</p>
       </div>
@@ -274,7 +274,7 @@ function saveDataSettings() {
         <transition name="drawer-bottom">
           <div
             v-if="activeModal.id === option.id && !excludedIds.includes(option.id)"
-            class="fixed inset-0 bg-black/40 flex justify-center items-end z-50"
+            class="fixed inset-0 bg-[#2222226b] flex justify-center items-end z-50"
             @click="closeModal"
           >
             <div
@@ -297,7 +297,7 @@ function saveDataSettings() {
                   <div
                     class="rounded-3xl shadow-sm p-5 border border-black/10 bg-white flex flex-col gap-4"
                   >
-                    <h3 class="font-bold text-black mb-2">تغییر فونت و اندازه متن</h3>
+                    <h3 class="font-bold text-[#222] mb-2">تغییر فونت و اندازه متن</h3>
                     <div class="flex flex-col gap-2">
                       <span class="text-gray-600">فونت پیام‌ها:</span>
                       <label class="flex items-center gap-2 cursor-pointer">
@@ -305,7 +305,7 @@ function saveDataSettings() {
                           type="radio"
                           value="IRANSans"
                           v-model="selectedFont"
-                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-black"
+                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#222]"
                         />
                         ایران سنس
                       </label>
@@ -314,7 +314,7 @@ function saveDataSettings() {
                           type="radio"
                           value="Vazir"
                           v-model="selectedFont"
-                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-black"
+                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#222]"
                         />
                         وزیر
                       </label>
@@ -323,7 +323,7 @@ function saveDataSettings() {
                           type="radio"
                           value="Shabnam"
                           v-model="selectedFont"
-                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-black"
+                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#222]"
                         />
                         شبنم
                       </label>
@@ -332,7 +332,7 @@ function saveDataSettings() {
                           type="radio"
                           value="Esteghlal"
                           v-model="selectedFont"
-                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-black"
+                          class="appearance-none w-5 h-5 border-2 border-gray-700 rounded-full checked:bg-[#222]"
                         />
                         استعداد
                       </label>
@@ -384,7 +384,7 @@ function saveDataSettings() {
                     </div>
                     <!-- Preview -->
                     <div
-                      class="mt-4 p-3 bg-gray-100 rounded-2xl text-black shadow-sm"
+                      class="mt-4 p-3 bg-gray-100 rounded-2xl text-[#222] shadow-sm"
                       :style="{ fontFamily: selectedFont, fontSize: selectedSize }"
                     >
                       این یک پیام نمونه است. فونت و اندازه متن را تغییر دهید تا تغییرات را
@@ -404,7 +404,7 @@ function saveDataSettings() {
                     <div
                       class="rounded-3xl shadow-sm p-5 border border-black/10 bg-white flex flex-col gap-4"
                     >
-                      <h3 class="font-bold text-black text-lg">
+                      <h3 class="font-bold text-[#222] text-lg">
                         آخرین بازدید و آنلاین بودن
                       </h3>
                       <div
@@ -414,15 +414,15 @@ function saveDataSettings() {
                         <label
                           class="flex items-center justify-between p-3 bg-gray-100 rounded-full cursor-pointer select-none shadow-sm"
                         >
-                          <span class="text-black">نمایش وضعیت به:</span>
+                          <span class="text-[#222]">نمایش وضعیت به:</span>
                           <div class="flex items-center gap-2">
-                            <span class="font-medium text-black">
+                            <span class="font-medium text-[#222]">
                               {{ activityStatus === "all" ? "همه" : "مخاطبین" }}
                             </span>
                             <Icon
                               icon="lucide:arrow-down"
                               :class="{ 'rotate-180': activityOpen }"
-                              class="w-5 h-5 text-black transition-transform duration-200"
+                              class="w-5 h-5 text-[#222] transition-transform duration-200"
                             />
                           </div>
                         </label>
@@ -441,7 +441,7 @@ function saveDataSettings() {
                                 activityStatus = option.value;
                                 activityOpen = false;
                               "
-                              class="px-4 py-2 text-center cursor-pointer text-black font-medium transition-all"
+                              class="px-4 py-2 text-center cursor-pointer text-[#222] font-medium transition-all"
                             >
                               {{ option.label }}
                             </li>
@@ -455,9 +455,9 @@ function saveDataSettings() {
                       class="rounded-3xl shadow-sm p-5 border border-black/10 bg-white flex flex-col gap-5"
                     >
                       <div class="flex items-center justify-between">
-                        <h3 class="font-semibold text-black text-lg">تغییر رمز عبور</h3>
+                        <h3 class="font-semibold text-[#222] text-lg">تغییر رمز عبور</h3>
                         <button
-                          class="text-sm text-yellow-300 font-medium"
+                          class="text-sm text-yellow-400 font-medium"
                           @click="isEditingPassword = !isEditingPassword"
                         >
                           {{ isEditingPassword ? "ذخیره" : "ویرایش" }}
@@ -472,8 +472,8 @@ function saveDataSettings() {
                           :class="[
                             'w-full px-4 py-3 rounded-full text-sm focus:outline-none transition-all shadow-sm',
                             isEditingPassword
-                              ? 'bg-white border border-yellow-300'
-                              : 'bg-gray-100 cursor-not-allowed text-black',
+                              ? 'bg-white border border-yellow-400'
+                              : 'bg-gray-100 cursor-not-allowed text-[#222]',
                           ]"
                         />
                         <input
@@ -484,8 +484,8 @@ function saveDataSettings() {
                           :class="[
                             'w-full px-4 py-3 rounded-full text-sm focus:outline-none transition-all shadow-sm',
                             isEditingPassword
-                              ? 'bg-white border border-yellow-300'
-                              : 'bg-gray-100 cursor-not-allowed text-black',
+                              ? 'bg-white border border-yellow-400'
+                              : 'bg-gray-100 cursor-not-allowed text-[#222]',
                           ]"
                         />
                         <input
@@ -496,13 +496,13 @@ function saveDataSettings() {
                           :class="[
                             'w-full px-4 py-3 rounded-full text-sm focus:outline-none transition-all shadow-sm',
                             isEditingPassword
-                              ? 'bg-white border border-yellow-300'
-                              : 'bg-gray-100 cursor-not-allowed text-black',
+                              ? 'bg-white border border-yellow-400'
+                              : 'bg-gray-100 cursor-not-allowed text-[#222]',
                           ]"
                         />
                       </div>
                       <button
-                        class="w-full bg-black text-white font-bold py-3 rounded-full active:scale-95 transition-transform shadow-md"
+                        class="w-full bg-[#222] text-white font-bold py-3 rounded-full active:scale-95 transition-transform shadow-md"
                         @click="savePassword"
                       >
                         ذخیره تغییرات
@@ -528,7 +528,7 @@ function saveDataSettings() {
                           class="sr-only peer"
                         />
                         <div
-                          class="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-black transition-all"
+                          class="w-11 h-6 bg-gray-300 rounded-full peer-checked:bg-[#222] transition-all"
                         ></div>
                         <div
                           class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full peer-checked:translate-x-full transition-transform shadow"
@@ -544,7 +544,7 @@ function saveDataSettings() {
                         <input
                           type="checkbox"
                           v-model="notificationSounds.messages"
-                          class="w-5 h-5 accent-black"
+                          class="w-5 h-5 accent-[#222]"
                         />
                       </label>
                       <label class="flex items-center justify-between cursor-pointer">
@@ -552,7 +552,7 @@ function saveDataSettings() {
                         <input
                           type="checkbox"
                           v-model="notificationSounds.calls"
-                          class="w-5 h-5 accent-black"
+                          class="w-5 h-5 accent-[#222]"
                         />
                       </label>
                       <label class="flex items-center justify-between cursor-pointer">
@@ -560,13 +560,13 @@ function saveDataSettings() {
                         <input
                           type="checkbox"
                           v-model="notificationSounds.vibration"
-                          class="w-5 h-5 accent-black"
+                          class="w-5 h-5 accent-[#222]"
                         />
                       </label>
                     </div>
 
                     <button
-                      class="bg-black text-white font-bold py-3 rounded-full active:scale-95 transition-all"
+                      class="bg-[#222] text-white font-bold py-3 rounded-full active:scale-95 transition-all"
                       @click="saveNotificationSettings"
                     >
                       ذخیره تغییرات
@@ -598,21 +598,21 @@ function saveDataSettings() {
                         ><input
                           type="checkbox"
                           v-model="autoDownload.images"
-                          class="w-5 h-5 accent-black"
+                          class="w-5 h-5 accent-[#222]"
                       /></label>
                       <label class="flex items-center justify-between cursor-pointer"
                         ><span class="text-gray-700">ویدیوها</span
                         ><input
                           type="checkbox"
                           v-model="autoDownload.videos"
-                          class="w-5 h-5 accent-black"
+                          class="w-5 h-5 accent-[#222]"
                       /></label>
                       <label class="flex items-center justify-between cursor-pointer"
                         ><span class="text-gray-700">فایل‌ها</span
                         ><input
                           type="checkbox"
                           v-model="autoDownload.files"
-                          class="w-5 h-5 accent-black"
+                          class="w-5 h-5 accent-[#222]"
                       /></label>
                     </div>
                     <!-- ***برای آپدیت بعدی ***
@@ -631,7 +631,7 @@ function saveDataSettings() {
                     </div>
                     -->
                     <button
-                      class="w-full bg-black text-white font-bold py-3 rounded-full active:scale-95 transition-all shadow-md"
+                      class="w-full bg-[#222] text-white font-bold py-3 rounded-full active:scale-95 transition-all shadow-md"
                       @click="saveDataSettings"
                     >
                       ذخیره تغییرات
@@ -651,11 +651,11 @@ function saveDataSettings() {
                       type="text"
                       readonly
                       :value="inviteLink"
-                      class="w-full p-3 rounded-full bg-gray-100 text-black text-center shadow-sm"
+                      class="w-full p-3 rounded-full bg-gray-100 text-[#222] text-center shadow-sm"
                     />
                     <button
                       @click="copyInvite"
-                      class="px-4 py-2 bg-black text-white rounded-full items-center"
+                      class="px-4 py-2 bg-[#222] text-white rounded-full items-center"
                     >
                       کپی لینک
                     </button>
@@ -666,12 +666,12 @@ function saveDataSettings() {
                     <div
                       class="flex items-center justify-between bg-gray-100 p-3 rounded-full my-5 shadow-sm"
                     >
-                      <span class="font-mono font-semibold text-yellow-300 mr-2"
+                      <span class="font-mono font-semibold text-yellow-400 mr-2"
                         >Bkhr71404</span
                       >
                       <button
                         @click="handleCopyInvite"
-                        class="relative flex items-center justify-center w-24 h-10 text-black overflow-hidden"
+                        class="relative flex items-center justify-center w-24 h-10 text-[#222] overflow-hidden"
                       >
                         <span
                           v-show="!copied"
@@ -684,7 +684,7 @@ function saveDataSettings() {
                           icon="lucide:circle-check"
                           width="25"
                           height="25"
-                          class="absolute text-black animate-check"
+                          class="absolute text-[#222] animate-check"
                         />
                       </button>
                     </div>
@@ -733,28 +733,28 @@ function saveDataSettings() {
                   v-else-if="option.id === 9"
                   class="h-[25vh] w-full px-3 flex flex-col gap-6 bg-white text-center mt-5"
                 >
-                  <div class="text-black leading-relaxed">
+                  <div class="text-[#222] leading-relaxed">
                     تیم
                     <span
-                      class="inline-block align-middle transform bg-yellow-300 text-black mx-1.5 rotate-2"
+                      class="inline-block align-middle transform bg-yellow-400 text-[#222] mx-1.5 rotate-2"
                     >
                       کُدینچی
                     </span>
                     با اپلیکیشن
                     <span
-                      class="inline-block align-middle transform bg-yellow-300 text-black mx-1.5 -rotate-2"
+                      class="inline-block align-middle transform bg-yellow-400 text-[#222] mx-1.5 -rotate-2"
                     >
                       بخر
                     </span>
                     اینجاست تا خرید کردن رو برای شما ساده و سریع کنه.<br />
                     هر ویژگی و هر به‌روزرسانی با
                     <span
-                      class="inline-block align-middle transform bg-yellow-300 text-black mx-1.5 rotate-1"
+                      class="inline-block align-middle transform bg-yellow-400 text-[#222] mx-1.5 rotate-1"
                     >
                       هدف راحتی
                     </span>
                     <span
-                      class="inline-block align-middle transform bg-yellow-300 text-black mx-1.5 rotate-1"
+                      class="inline-block align-middle transform bg-yellow-400 text-[#222] mx-1.5 rotate-1"
                     >
                       و رضایت شما
                     </span>
@@ -777,7 +777,7 @@ function saveDataSettings() {
                     <a
                       href="https://mail.google.com/mail/?view=cm&to=jessmafmbt@gmail.com"
                       target="_blank"
-                      class="flex items-center gap-2 bg-gray-100 text-black p-3 rounded-full shadow-sm"
+                      class="flex items-center gap-2 bg-gray-100 text-[#222] p-3 rounded-full shadow-sm"
                     >
                       <Icon icon="lucide:mail" class="w-5 h-5" />
                       ارسال ایمیل
@@ -786,7 +786,7 @@ function saveDataSettings() {
                     <!-- چت آنلاین -->
                     <RouterLink
                       to="/contactus"
-                      class="flex items-center gap-2 bg-gray-100 text-black p-3 rounded-full shadow-sm"
+                      class="flex items-center gap-2 bg-gray-100 text-[#222] p-3 rounded-full shadow-sm"
                     >
                       <Icon icon="lucide:headset" class="w-5 h-5" />
                       چت آنلاین
@@ -795,7 +795,7 @@ function saveDataSettings() {
                     <!-- ارسال تیکت -->
                     <RouterLink
                       to="/submit-ticket"
-                      class="flex items-center gap-2 bg-gray-100 text-black p-3 rounded-full shadow-sm"
+                      class="flex items-center gap-2 bg-gray-100 text-[#222] p-3 rounded-full shadow-sm"
                     >
                       <Icon icon="lucide:message-circle" class="w-5 h-5" />
                       ارسال تیکت
@@ -815,7 +815,7 @@ function saveDataSettings() {
                     <!-- پرسش‌های متداول -->
                     <RouterLink
                       to="/faq"
-                      class="flex items-center gap-2 bg-gray-100 text-black p-3 rounded-full shadow-sm"
+                      class="flex items-center gap-2 bg-gray-100 text-[#222] p-3 rounded-full shadow-sm"
                     >
                       <Icon icon="lucide:info" class="h-5 w-5" />
                       پرسش‌های متداول
@@ -824,7 +824,7 @@ function saveDataSettings() {
                     <!-- پرسیدن سوال -->
                     <RouterLink
                       to="/ask-question"
-                      class="flex items-center gap-2 bg-gray-100 text-black p-3 rounded-full shadow-sm"
+                      class="flex items-center gap-2 bg-gray-100 text-[#222] p-3 rounded-full shadow-sm"
                     >
                       <Icon icon="lucide:circle-question-mark" class="h-5 w-5" />
 
@@ -834,7 +834,7 @@ function saveDataSettings() {
                     <!-- سیاست حریم خصوصی -->
                     <RouterLink
                       to="/privacy-policy"
-                      class="flex items-center gap-2 bg-gray-100 text-black p-3 rounded-full shadow-sm"
+                      class="flex items-center gap-2 bg-gray-100 text-[#222] p-3 rounded-full shadow-sm"
                     >
                       <Icon icon="lucide:ghost" class="h-5 w-5" />
 

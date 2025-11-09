@@ -3,13 +3,18 @@ import type { DialogContentEmits, DialogContentProps } from "reka-ui"
 import type { HTMLAttributes } from "vue"
 import { useForwardPropsEmits } from "reka-ui"
 import { DrawerContent, DrawerPortal } from "vaul-vue"
-import { cn } from "@/lib/utils"
-import DrawerOverlay from "./DrawerOverlay.vue"
+import { cn } from "../../../lib/utils"
+import * as DrawerOverlay from "./DrawerOverlay.vue"
 
+
+// تعریف props با کلاس اختیاری
 const props = defineProps<DialogContentProps & { class?: HTMLAttributes["class"] }>()
+
+// تعریف emits
 const emits = defineEmits<DialogContentEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits)
+// هدایت props و emits به کامپوننت داخلی
+const forwarded = useForwardPropsEmits(props, emits) as unknown as Record<string, unknown>
 </script>
 
 <template>
@@ -27,7 +32,9 @@ const forwarded = useForwardPropsEmits(props, emits)
         props.class,
       )"
     >
-      <div class="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+      <div
+        class="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block"
+      />
       <slot />
     </DrawerContent>
   </DrawerPortal>
